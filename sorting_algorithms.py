@@ -19,12 +19,47 @@ def HeapSort(arr):
         arr.remove(max(arr))
     return list(reversed(heap))
 
+def MergeSort(arr):
+    if len(arr) > 1:
+        #split array in half
+        arr1 = arr[0:int(len(arr)/2)]
+        arr2 = arr[int(len(arr)/2):len(arr)+1]
+
+        MergeSort(arr1)
+        MergeSort(arr2)
+
+        k = l = m = 0
+
+        #compare first elements of two sub arrays and sort
+        while k < len(arr1) and l < len(arr2):
+            if arr1[k] < arr2[l]:
+                arr[m] = arr1[k]
+                k += 1
+            else:
+                arr[m] = arr2[l]
+                l += 1
+            m += 1
         
+        #add remaining elements
+        while k < len(arr1):
+            arr[m] = arr1[k]
+            k +=1
+            m +=1
+
+        while l < len(arr2):
+            arr[m] = arr2[l]
+            l +=1
+            m +=1
+    
+        return arr
+
+    else:
+        return arr
+            
+    
 
 def main():
-    matrix = [7,1,2,3,9,11,7,7,9]
-    result = HeapSort(matrix)
+    matrix = [7,1,2,3,9,11,6,7,9]
+    result = MergeSort(matrix)
     print(result)
 main()
-
-
